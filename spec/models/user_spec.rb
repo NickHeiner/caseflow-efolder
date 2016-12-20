@@ -48,6 +48,7 @@ describe User do
     it "returns a user from session and request" do
       expect(subject.name).to eq("Billy Bob Thorton")
       expect(subject.ip_address).to eq("123.123.222.222")
+      expect(subject.email).to eq user.email
     end
 
     context "when session user is nil" do

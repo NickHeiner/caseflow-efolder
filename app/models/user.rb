@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
       user = session["user"]
       find_or_create_by(css_id: user["css_id"], station_id: user["station_id"]).tap do |u|
         u.name = user["name"]
+        u.email = user["email"]
         u.roles = user["roles"]
         u.ip_address = request.remote_ip
         u.save
