@@ -80,7 +80,6 @@ RSpec.feature "Stats Dashboard" do
         completed_at: 3.hours.ago
       )
     end
-
   end
 
   after { Timecop.return }
