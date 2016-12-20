@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
       # Raven sends error info to Sentry.
       Raven.user_context(
         id: current_user.id,
+        css_id: current_user.css_id,
         email: current_user.email,
         ip_address: current_user.ip_address,
         station_id: current_user.station_id

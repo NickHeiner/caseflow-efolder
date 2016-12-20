@@ -2,8 +2,8 @@ describe User do
   let(:name) { "Billy Bob Thorton" }
   let(:roles) { ["Download eFolder"] }
   let(:user) do
-    User.new(id: "123", email: "email@va.gov", name: name,
-             roles: roles, station_id: "213", ip_address: "12.12.12.12")
+    User.create(css_id: "123", email: "email@va.gov", name: name,
+                roles: roles, station_id: "213", ip_address: "12.12.12.12")
   end
 
   before { User.stub = nil }
@@ -42,7 +42,7 @@ describe User do
 
   context ".from_session" do
     let(:request) { OpenStruct.new(remote_ip: "123.123.222.222") }
-    let(:session) { { "user" => user.as_json } }
+    let(:session) { { "user" => user.as_json.merge("roles" => user.roles, "name" => user.name) } }
     subject { User.from_session(session, request) }
 
     it "returns a user from session and request" do
@@ -51,7 +51,7 @@ describe User do
     end
 
     context "when session user is nil" do
-      let(:user) { nil }
+      let(:session) { { "user" => nil } }
       it { is_expected.to be_nil }
     end
   end
@@ -82,11 +82,11 @@ describe User do
     subject { User.from_css_auth_hash(auth_hash) }
 
     it "returns a user with the correct attributes" do
-      expect(subject.id).to eq("UID")
-      expect(subject.name).to eq("Kanye West")
-      expect(subject.email).to eq("kanye@va.gov")
-      expect(subject.roles).to eq(["Download eFolder"])
-      expect(subject.station_id).to eq("123")
+      expect(subject[:css_id]).to eq("UID")
+      expect(subject[:name]).to eq("Kanye West")
+      expect(subject[:email]).to eq("kanye@va.gov")
+      expect(subject[:roles]).to eq(["Download eFolder"])
+      expect(subject[:station_id]).to eq("123")
     end
   end
 end

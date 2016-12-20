@@ -17,6 +17,7 @@ class Download < ActiveRecord::Base
   # https://github.com/department-of-veterans-affairs/caseflow-efolder/issues/213
   has_many :documents, -> { order(received_at: :desc, id: :asc) }
   has_many :searches
+  belongs_to :user
 
   before_create do |download|
     # This fake is used in the test suite, but let's
@@ -131,12 +132,12 @@ class Download < ActiveRecord::Base
   end
 
   def user_id_string
-    "(#{user_id} - Station #{user_station_id})"
+    "(#{css_id} - Station #{user_station_id})"
   end
 
   def email
     Search.where.not(email: nil)
-          .find_by(user_id: user_id)
+          .find_by(css_id: css_id)
           .try(:email)
   end
 
