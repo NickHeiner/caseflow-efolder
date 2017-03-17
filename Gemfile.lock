@@ -20,20 +20,6 @@ GIT
       rails (= 4.2.7.1)
 
 GIT
-  remote: https://github.com/department-of-veterans-affairs/connect_vbms.git
-  revision: 431b529fe06770a70297f4ff1745881100e6cfe1
-  ref: 431b529fe06770a70297f4ff1745881100e6cfe1
-  specs:
-    connect_vbms (1.0.0)
-      httpclient (~> 2.8.0)
-      httpi (~> 2.4)
-      mail
-      nokogiri (~> 1.6)
-      nori
-      xmldsig (~> 0.3.1)
-      xmlenc (~> 0.5.0)
-
-GIT
   remote: https://github.com/department-of-veterans-affairs/omniauth-saml-va
   revision: 24a515b3cbaf17e543e1351c2846001cc2b40c09
   branch: paultag/css
@@ -59,6 +45,18 @@ GIT
       poltergeist
       rainbow
       selenium-webdriver
+
+PATH
+  remote: /Users/vhaisaroltsa/dev/connect_vbms
+  specs:
+    connect_vbms (1.0.0)
+      httpclient (~> 2.8.0)
+      httpi (~> 2.4)
+      mail
+      nokogiri (~> 1.6)
+      nori
+      xmldsig (~> 0.3.1)
+      xmlenc (~> 0.5.0)
 
 GEM
   remote: https://rubygems.org/
@@ -441,6 +439,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.7.1)
   rails_stdout_logging
+  redis-namespace
   redis-rails
   rspec
   rspec-rails
