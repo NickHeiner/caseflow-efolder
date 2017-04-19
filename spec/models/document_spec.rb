@@ -20,14 +20,20 @@ describe Document do
 
       context "if application/octet-stream" do
         let(:mime_type) { "application/octet-stream" }
+        # on initialize should not change mime_type
+        it { is_expected.to eq("application/octet-stream") }
+      end
+    end
+  end
+
+  context ".create" do
+    context "mime_type" do
+      subject { Document.create(mime_type: mime_type).mime_type }
+
+      context "if application/octet-stream" do
+        let(:mime_type) { "application/octet-stream" }
 
         it { is_expected.to eq("application/pdf") }
-      end
-
-      context "if text/plain" do
-        let(:mime_type) { "text/plain" }
-
-        it { is_expected.to eq("text/plain") }
       end
     end
   end
